@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.uoc.pec3.android.contactlist">
+    package="edu.uoc.android.contacts">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="ContactListApplication"
+        android:name="edu.uoc.android.contacts.ContactListApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:theme="@style/AppThemeNoActionBar"
-            android:name=".views.SplashActivity">
+            android:name="edu.uoc.android.contacts.views.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

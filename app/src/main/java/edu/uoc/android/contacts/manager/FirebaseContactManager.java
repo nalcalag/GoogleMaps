@@ -1,48 +1,42 @@
-package edu.uoc.pec3.android.contactlist.manager;
+package edu.uoc.android.contacts.manager;
 
-import com.firebase.client.Firebase;
-import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import edu.uoc.android.contacts.model.Contact;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.uoc.pec3.android.contactlist.model.Contact;
-
-/**
- * Created by mgarcia on 23/03/2016.
- */
 public class FirebaseContactManager {
+
+    private static final String CONTACTS_URL = "https://burning-fire-1164.firebaseio.com/contacts";
 
     // Class instance
     private static FirebaseContactManager instance = null;
     // Reference of Firebase object
-    private Firebase firebaseContactRef;
-    // List of contacts
+    private DatabaseReference firebaseContactRef;
+    // List of edu.uoc.android.contacts
     private HashMap<String, Contact> contactHashMap = new HashMap<>();
 
     /**
      * Classic Singleton design pattern implementation
      */
     public static FirebaseContactManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new FirebaseContactManager();
         }
         return instance;
     }
 
-    /**
-     * Constructor
-     */
     private FirebaseContactManager() {
-        // init Firebase reference
-        firebaseContactRef = new Firebase("https://burning-fire-1164.firebaseio.com/contacts");
+        // Initialize Firebase reference
+        firebaseContactRef = FirebaseDatabase.getInstance().getReferenceFromUrl(CONTACTS_URL);
     }
 
     /**
-     * Retrieving the list of contacts from Firebase server
-     * @param listener
+     * Retrieving the list of edu.uoc.android.contacts from Firebase server
      */
     public void getContactFromServer(ValueEventListener listener) {
         firebaseContactRef.keepSynced(true);
@@ -51,7 +45,7 @@ public class FirebaseContactManager {
     }
 
     /**
-     * Retrieving the list of contacts
+     * Retrieving the list of edu.uoc.android.contacts
      */
     public List<Contact> getAllContacts() {
         return new ArrayList<>(contactHashMap.values());
@@ -59,7 +53,6 @@ public class FirebaseContactManager {
 
     /**
      * Retrieving a contact from list
-     * @param objectId
      */
     public Contact getContactByObjectId(String objectId) {
         return contactHashMap.get(objectId);
@@ -67,7 +60,6 @@ public class FirebaseContactManager {
 
     /**
      * Adding a contact to HashMap
-     * @param contact
      */
     public void addContactHashMap(Contact contact) {
         this.contactHashMap.put(contact.getObjectId(), contact);

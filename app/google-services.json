@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "687543049740",
+    "firebase_url": "https://burning-fire-1164.firebaseio.com",
+    "project_id": "burning-fire-1164",
+    "storage_bucket": "burning-fire-1164.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687543049740:android:4ceefb7ebf048425",
+        "android_client_info": {
+          "package_name": "edu.uoc.android.contacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687543049740-brgmah3a17ad5ioq89d4hm9194u7pn14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA22PdrekeCRB5ODbqtifgBY6JyljLjepw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
