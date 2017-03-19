@@ -1,6 +1,6 @@
 [![N|Solid](http://www.uoc.edu/portal/_resources/common/imatges/marca_UOC/UOC_Masterbrand_3linies.jpg)](http://www.uoc.edu/portal/ca/index.html)
 
-# SQL in Android
+# Maps in Android
 
 ### Description
 This project is to learn how to implements maps in Android. It uses Firebase to get the data to be shown in the map. All the instructions are in the activity. 
