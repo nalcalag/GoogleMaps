@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:theme="@style/AppThemeNoActionBar"
-            android:name="edu.uoc.android.contacts.views.SplashActivity">
+            android:name="edu.uoc.android.contacts.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package edu.uoc.android.contacts.views;
+package edu.uoc.android.contacts.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
