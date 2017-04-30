@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="title_activity_contact_list">Map</string>
 </resources>

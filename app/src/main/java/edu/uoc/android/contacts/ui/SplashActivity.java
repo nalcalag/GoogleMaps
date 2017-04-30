@@ -1,10 +1,13 @@
 package edu.uoc.android.contacts.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import edu.uoc.android.contacts.ContactListActivity;
 import edu.uoc.android.contacts.R;
 import edu.uoc.android.contacts.manager.FirebaseContactManager;
 import edu.uoc.android.contacts.model.Contact;
@@ -38,5 +41,7 @@ public class SplashActivity extends AppCompatActivity implements ValueEventListe
 
     private void startMainActivity() {
         // TODO: make an Intent to go to contact list activity
+        Intent i = new Intent(this, ContactListActivity.class);
+        startActivity(i);
     }
 }
