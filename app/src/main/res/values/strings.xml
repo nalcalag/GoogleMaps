@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Contacts</string>
     <string name="title_activity_contact_list">Map</string>
+
+    <string name="permission_denied">Permission denied</string>
 </resources>
