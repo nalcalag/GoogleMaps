@@ -40,7 +40,6 @@ public class SplashActivity extends AppCompatActivity implements ValueEventListe
     }
 
     private void startMainActivity() {
-        // TODO: make an Intent to go to contact list activity
         Intent i = new Intent(this, ContactListActivity.class);
         startActivity(i);
     }

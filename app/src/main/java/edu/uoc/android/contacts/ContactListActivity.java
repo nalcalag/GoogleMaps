@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -87,12 +88,6 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
 
     /**
      * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -128,9 +123,14 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
             GeoLocation geoLocation = contact.getLocation();
             String name = contact.getName();
 
-            // Add a marker in Contact Location and move the camera
+            // Get contact location
             LatLng latLng = new LatLng(geoLocation.getLatitude(), geoLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(name));
+            //Create Marker
+            MarkerOptions marker = new MarkerOptions().position(latLng).title(name);
+            // Set marker icon
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker));
+            // Add contact marker
+            mMap.addMarker(marker);
 
         }
 
@@ -153,10 +153,9 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an expanation to the user *asynchronously* -- don't block
+                // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                //  TODO: Prompt with explanation!
 
                 //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
