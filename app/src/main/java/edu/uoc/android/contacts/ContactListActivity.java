@@ -43,8 +43,6 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
     float z;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation = null;
-    BreakIterator mLatitudeText = null;
-    BreakIterator mLongitudeText = null;
     //Request code
     private final int REQUEST_PERMISSION_LOCATION = 101;
 
@@ -169,6 +167,9 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
 
         if (checkLocationPermission()) {
 
+            // Enable Location button
+            mMap.setMyLocationEnabled(true);
+
             // Get user Location
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
@@ -177,10 +178,8 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
                 //Move the camera to the user's location and zoom in!
                 LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
-            }
 
-            // Enable Location button
-            mMap.setMyLocationEnabled(true);
+            }
         }
         return;
 
@@ -207,6 +206,9 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
+                        // Enable Location button
+                        mMap.setMyLocationEnabled(true);
+
                         // Get user Location
                         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
@@ -216,9 +218,6 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
                             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
                         }
-
-                        // Enable Location button
-                        mMap.setMyLocationEnabled(true);
                     }
 
                 } else {
