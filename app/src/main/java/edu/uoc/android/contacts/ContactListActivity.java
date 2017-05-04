@@ -133,25 +133,15 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
             mMap.addMarker(marker);
 
         }
-
-        if (mLastLocation != null) {
-            //Move the camera to the user's location and zoom in!
-            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
-        } else {
-            //Move the camera to the first contact and zoom in!
-            LatLng latLng = new LatLng(contactList.get(0).getLocation().getLatitude(), contactList.get(0).getLocation().getLongitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
-        }
-
-
     }
 
     public boolean checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION) &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
@@ -159,13 +149,13 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
 
                 //Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         REQUEST_PERMISSION_LOCATION);
 
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                         REQUEST_PERMISSION_LOCATION);
             }
             return false;
@@ -176,18 +166,23 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+        if (checkLocationPermission()) {
 
+            // Get user Location
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
             if (mLastLocation != null) {
-                mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-                mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+
+                //Move the camera to the user's location and zoom in!
+                LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
             }
-            return;
+
+            // Enable Location button
+            mMap.setMyLocationEnabled(true);
         }
+        return;
 
     }
 
@@ -209,17 +204,21 @@ public class ContactListActivity extends FragmentActivity implements OnMapReadyC
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     // permission was granted, yay!
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        mMap.setMyLocationEnabled(true);
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                        // Get user Location
+                        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
                         if (mLastLocation != null) {
+
                             //Move the camera to the user's location and zoom in!
                             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
-                        } else {
-                            //Move the camera to the first contact and zoom in!
-                            LatLng latLng = new LatLng(contactList.get(0).getLocation().getLatitude(), contactList.get(0).getLocation().getLongitude());
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
                         }
+
+                        // Enable Location button
+                        mMap.setMyLocationEnabled(true);
                     }
 
                 } else {
