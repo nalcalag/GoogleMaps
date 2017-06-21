@@ -7,7 +7,7 @@ This app shows you how to implements maps in Android. It uses Firebase to get th
 Open your terminal, navigate to your working directory, use `git clone` to get a copy of the repo.
 
 ```
-$ git clone https://eimtgit.uoc.edu/docente_android/android1-pec3-maps.git
+$ git clone https://github.com/nalcalag/GoogleMaps.git
 ```
 
 ### Goals
